@@ -16,21 +16,24 @@ function DogList() {
       .catch((error) => {
         console.error("Error fetching dog images:", error);
       });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchDogInfo = () => {
-    axios.get("https://dog.ceo/api/breeds/list/all")
+    axios
+      .get("https://dog.ceo/api/breeds/list/all")
       .then((response) => {
         const allBreeds = response.data.message;
         const dogSubBreedsMap = {};
 
         Promise.all(
           Object.keys(allBreeds).map((breedName) =>
-            axios.get(`https://dog.ceo/api/breed/${breedName}/list`)
+            axios
+              .get(`https://dog.ceo/api/breed/${breedName}/list`)
               .then((response) => {
                 const subBreeds = response.data.message;
-                dogSubBreedsMap[breedName] = subBreeds && subBreeds.length > 0 ? subBreeds : null;
+                dogSubBreedsMap[breedName] =
+                  subBreeds && subBreeds.length > 0 ? subBreeds : null;
               })
           )
         ).then(() => {
@@ -49,7 +52,7 @@ function DogList() {
   };
 
   const filterImagesWithSubBreeds = (images) => {
-    return images.filter(imageUrl => {
+    return images.filter((imageUrl) => {
       const breedName = extractBreedName(imageUrl);
       return dogSubBreeds[breedName] && dogSubBreeds[breedName].length > 0;
     });
@@ -75,7 +78,10 @@ function DogList() {
                 <div className="dog-info">
                   <h2 className="dog-title">
                     {subBreeds.length > 0 ? (
-                      <span className="sub-breeds"> - {subBreeds.join(", ")}</span>
+                      <span className="sub-breeds">
+                        {" "}
+                        - {subBreeds.join(", ")}
+                      </span>
                     ) : (
                       <span className="sub-breeds"> - Not SubBreeds</span>
                     )}
