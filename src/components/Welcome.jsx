@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../Styles/Welcome.css";
-import axios from 'axios'
-import toast from 'react-hot-toast'
+import axios from "axios";
+import toast from "react-hot-toast";
+
 function Welcome() {
   const [dogImageUrl, setDogImageUrl] = useState("");
 
@@ -18,8 +19,8 @@ function Welcome() {
   }, []);
 
   return (
-    <div className="container">
-      <div className="content">
+    <main className="container">
+      <section className="content">
         <div className="image-container">
           {dogImageUrl && <img src={dogImageUrl} alt="Dog" className="image" />}
         </div>
@@ -33,11 +34,11 @@ function Welcome() {
             the world.
           </p>
           <Link to="#" className="button">
-          Discover More
+            Discover More
           </Link>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
 
