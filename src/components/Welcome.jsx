@@ -33,7 +33,7 @@ function Welcome() {
             a random selection of the most adorable images of dogs from around
             the world.
           </p>
-          <Link to="#" className="button">
+          <Link to="/list" className="button">
             Discover More
           </Link>
         </div>
