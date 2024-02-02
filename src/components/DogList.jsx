@@ -1,27 +1,29 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../Styles/DogList.css";
-
+import toast from "react-hot-toast";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDog } from "@fortawesome/free-solid-svg-icons";
 function DogList() {
   const [dogImages, setDogImages] = useState([]);
   const [dogSubBreeds, setDogSubBreeds] = useState({});
-
+  const Api_Url = "https://dog.ceo/api";
   useEffect(() => {
     axios
-      .get("https://dog.ceo/api/breeds/image/random/50")
+      .get(`${Api_Url}/breeds/image/random/50`)
       .then((response) => {
         setDogImages(response.data.message);
         fetchDogInfo();
       })
       .catch((error) => {
-        console.error("Error fetching dog images:", error);
+        toast.error("Error fetching dog images:", error);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchDogInfo = () => {
     axios
-      .get("https://dog.ceo/api/breeds/list/all")
+      .get(`${Api_Url}/breeds/list/all`)
       .then((response) => {
         const allBreeds = response.data.message;
         const dogSubBreedsMap = {};
@@ -33,7 +35,9 @@ function DogList() {
               .then((response) => {
                 const subBreeds = response.data.message;
                 dogSubBreedsMap[breedName] =
-                  subBreeds && subBreeds.length > 0 ? subBreeds : null;
+                  subBreeds && subBreeds.length > 0
+                    ? subBreeds.slice(0, 3)
+                    : null;
               })
           )
         ).then(() => {
@@ -41,7 +45,7 @@ function DogList() {
         });
       })
       .catch((error) => {
-        console.error("Error fetching dog info:", error);
+        toast.error("Error fetching dog info:", error);
       });
   };
 
@@ -51,37 +55,45 @@ function DogList() {
     return parts[breedIndex].split("-")[0];
   };
 
-  const filterImagesWithSubBreeds = (images) => {
-    return images.filter((imageUrl) => {
-      const breedName = extractBreedName(imageUrl);
-      return dogSubBreeds[breedName] && dogSubBreeds[breedName].length > 0;
-    });
-  };
-
-  const filteredImages = filterImagesWithSubBreeds(dogImages);
+  const filteredImages = dogImages.filter((imageUrl) => {
+    const breedName = extractBreedName(imageUrl);
+    return dogSubBreeds[breedName] && dogSubBreeds[breedName].length > 0;
+  });
 
   return (
     <section className="dog-list-section">
-      <div className="container">
+      <div className="dog-container">
+        <img
+          src="https://acciontrabajo.do/biz_pic/2ygq"
+          alt="Logo"
+          className="img-minnek"
+        />
+        <h1 className="title-list">
+          Dog List <FontAwesomeIcon icon={faDog} />
+        </h1>
         <div className="dog-grid">
           {filteredImages.map((imageUrl, index) => {
             const breedName = extractBreedName(imageUrl);
-            const subBreeds = dogSubBreeds[breedName] || [];
+            const subBreeds = dogSubBreeds[breedName];
             return (
               <div className="dog-card" key={index}>
-                <h1>{breedName}</h1>
-                <img
-                  src={imageUrl}
-                  alt={`Dog ${index + 1}`}
-                  className="dog-img"
-                />
+                <h1 className="name-dog">{breedName}</h1>
+                <div className="img-container">
+                  <img
+                    src={imageUrl}
+                    alt={`Dog ${index + 1}`}
+                    className="dog-img"
+                  />
+                </div>
                 <div className="dog-info">
                   <h2 className="dog-title">
+                    Sub-Breeds:
                     {subBreeds.length > 0 ? (
-                      <span className="sub-breeds">
-                        {" "}
-                        - {subBreeds.join(", ")}
-                      </span>
+                      <ul className="sub-breeds">
+                        {subBreeds.map((subBreed, subIndex) => (
+                          <li key={subIndex}>{subBreed}</li>
+                        ))}
+                      </ul>
                     ) : (
                       <span className="sub-breeds"> - Not SubBreeds</span>
                     )}

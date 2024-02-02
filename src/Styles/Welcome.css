@@ -3,6 +3,7 @@
   min-height: 100vh;
   justify-content: center;
   align-items: center;
+  background-color: #bffbfb;
 }
 
 .content {
@@ -10,7 +11,7 @@
   max-width: 56rem;
   width: 90%;
   border-radius: 1rem;
-  background-color: #ffffff;
+  background-color: white;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px 3px rgba(0, 0, 0, 0.06);
 }
@@ -70,7 +71,6 @@
 .button:hover {
   background-color: #d9468f;
 }
-
 
 @media only screen and (max-width: 768px) {
   .content {
