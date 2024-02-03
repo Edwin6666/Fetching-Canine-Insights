@@ -12,10 +12,10 @@ const DogCrud = () => {
   const [formData, setFormData] = useState({ name: "", subBreed: "" });
   const [searchTerm, setSearchTerm] = useState("");
   const [editIndex, setEditIndex] = useState(null);
-
+  const Api_Url = "https://dog.ceo/api";
   useEffect(() => {
     axios
-      .get("https://dog.ceo/api/breeds/list/all")
+      .get(`${Api_Url}/breeds/list/all`)
       .then((response) => {
         const allBreeds = response.data.message;
         const dogsList = [];
