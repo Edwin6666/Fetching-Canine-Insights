@@ -32,7 +32,7 @@ function DogList() {
         Promise.all(
           Object.keys(allBreeds).map((breedName) =>
             axios
-              .get(`https://dog.ceo/api/breed/${breedName}/list`)
+              .get(`${Api_Url}/breed/${breedName}/list`)
               .then((response) => {
                 const subBreeds = response.data.message;
                 dogSubBreedsMap[breedName] =
