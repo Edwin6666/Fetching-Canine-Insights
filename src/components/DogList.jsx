@@ -3,7 +3,8 @@ import axios from "axios";
 import "../Styles/DogList.css";
 import toast from "react-hot-toast";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDog } from "@fortawesome/free-solid-svg-icons";
+import { faDog, faScrewdriverWrench } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 function DogList() {
   const [dogImages, setDogImages] = useState([]);
   const [dogSubBreeds, setDogSubBreeds] = useState({});
@@ -68,13 +69,21 @@ function DogList() {
           alt="Logo"
           className="img-minnek"
         />
+        <div className="manage-link">
+          {" "}
+          <Link className="button-link" to="/table">
+            Manage <FontAwesomeIcon icon={faScrewdriverWrench} />
+          </Link>
+        </div>
         <h1 className="title-list">
           Dog List <FontAwesomeIcon icon={faDog} />
         </h1>
+
         <div className="dog-grid">
           {filteredImages.map((imageUrl, index) => {
             const breedName = extractBreedName(imageUrl);
             const subBreeds = dogSubBreeds[breedName];
+
             return (
               <div className="dog-card" key={index}>
                 <h1 className="name-dog">{breedName}</h1>
