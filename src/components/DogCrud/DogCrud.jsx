@@ -5,19 +5,17 @@ import toast from "react-hot-toast";
 import DogForm from "./DogForm";
 import DogTable from "./DogTable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaw } from "@fortawesome/free-solid-svg-icons";
+import { faPaw,faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 const DogCrud = () => {
   const [dogs, setDogs] = useState([]);
   const [formData, setFormData] = useState({ name: "", subBreed: "" });
   const [searchTerm, setSearchTerm] = useState("");
   const [editIndex, setEditIndex] = useState(null);
-
   const Api_Url = "https://dog.ceo/api";
   useEffect(() => {
     axios
       .get(`${Api_Url}/breeds/list/all`)
-
       .then((response) => {
         const allBreeds = response.data.message;
         const dogsList = [];
@@ -87,10 +85,19 @@ const DogCrud = () => {
       dog.subBreed.toLowerCase().includes(searchTerm.toLowerCase())
     );
   });
+  const goBack = () => {
+    window.history.back();
+  };
 
   return (
     <section className="background-container">
       <div className="container-table">
+      <button
+            className="goback-btn"
+            onClick={goBack}
+          >
+            <FontAwesomeIcon icon={faArrowLeft}  size="2xl"/>
+          </button>
         <h1 className="title-table">
           Manage Dogs and Sub-breeds <FontAwesomeIcon icon={faPaw} />
         </h1>
