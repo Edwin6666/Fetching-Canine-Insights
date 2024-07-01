@@ -33,8 +33,5 @@ npm start
 
 ## Author
 
-- [@Edwin6666](https://github.com/Edwin6666)
+- [@EdwinDev6](https://github.com/EdwinDev6)
 
-
-
-![Logo](https://minnekdigital.com/img/minnek-logo.svg)
