@@ -11,7 +11,7 @@ In order to use Fetching-Canine-Insights we must do the following:
   We clone the project
 
   ```bash
-  git clone https://github.com/Edwin6666/Fetching-Canine-Insights.git
+  git clone https://github.com/Edwindev6/Fetching-Canine-Insights.git
   ```
 We access the project folder and install
 ```bash
