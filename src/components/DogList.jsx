@@ -64,11 +64,6 @@ function DogList() {
   return (
     <section className="dog-list-section">
       <div className="dog-container">
-        <img
-          src="https://acciontrabajo.do/biz_pic/2ygq"
-          alt="Logo"
-          className="img-minnek"
-        />
         <div className="manage-link">
           {" "}
           <Link className="button-link" to="/table">
