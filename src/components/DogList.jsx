@@ -65,7 +65,6 @@ function DogList() {
     <section className="dog-list-section">
       <div className="dog-container">
         <div className="manage-link">
-          {" "}
           <Link className="button-link" to="/table">
             Manage <FontAwesomeIcon icon={faScrewdriverWrench} />
           </Link>
