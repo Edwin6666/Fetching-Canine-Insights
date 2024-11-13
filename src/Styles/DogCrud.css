@@ -26,7 +26,7 @@
 }
 
 .container-table::-webkit-scrollbar {
-  width: 15px;
+  width: 5px;
 }
 
 .container-table::-webkit-scrollbar-thumb {
